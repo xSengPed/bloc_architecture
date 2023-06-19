@@ -1,19 +1,31 @@
+// ignore_for_file: must_be_immutable
+
 part of 'counter_bloc.dart';
 
 @immutable
 abstract class CounterState {
-  int get value => 0;
+  int count = 0;
 }
 
 class CounterInitial extends CounterState {}
 
-class CounterLoading extends CounterState {}
-
-class CounterFinal extends CounterState {
-  final int _value;
-
-  CounterFinal(this._value);
+class CounterSuccess extends CounterState {
+  final int _count;
+  CounterSuccess(this._count);
 
   @override
-  int get value => _value;
+  int get count => _count;
 }
+
+class CounterError extends CounterState {
+  final String message;
+  CounterError(this.message);
+  @override
+  String toString() {
+    return message;
+  }
+}
+
+class CounterLoading extends CounterState {}
+
+class CounterLoadingComplete extends CounterState {}
